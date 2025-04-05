@@ -67,7 +67,7 @@
 
     .back-button {
       display: block;
-      margin: 0 auto 30px auto;
+      margin: 40px auto;
       padding: 12px 24px;
       font-size: 16px;
       color: white;
@@ -77,8 +77,6 @@
       text-decoration: none;
       cursor: pointer;
       width: fit-content;
-      margin-top: 40px;
-
     }
 
     .back-button:hover {
@@ -97,41 +95,116 @@
 </head>
 <body>
   <div class="container">
-
     <header>
       <h1>Photo Gallery</h1>
       <p>Enjoy a random selection of photos</p>
     </header>
 
-    <div class="photo-display" id="photo-display">
-      <!-- Photos will be dynamically loaded here -->
-    </div>
+    <div class="photo-display" id="photo-display"></div>
+
     <a href="index.html" class="back-button">Back to Home</a>
-
-
   </div>
+
   <footer>
     <p>&copy; 2025 Po-Cheng Huang. All rights reserved.</p>
   </footer>
-  <script>
-    async function fetchPhotos(folder) {
-      const response = await fetch(folder);
-      if (!response.ok) {
-        console.error(`Failed to fetch photos from ${folder}`);
-        return [];
-      }
-      const text = await response.text();
-      const parser = new DOMParser();
-      const html = parser.parseFromString(text, "text/html");
-      const links = Array.from(html.querySelectorAll("a"))
-        .map(link => folder + link.getAttribute("href"))
-        .filter(href => href.match(/\.(jpg|jpeg|png|gif)$/i));
-      return links;
-    }
 
-    async function initializeGallery() {
-      const photos = await fetchPhotos("photo/horizontal/");
-      let currentIndex = 0;
+  <script>
+const photos = [
+  "photo/horizontal/DSC05339.jpg",
+  "photo/horizontal/DSC05341.jpg",
+  "photo/horizontal/DSC05344.jpg",
+  "photo/horizontal/DSC05346_1.jpg",
+  "photo/horizontal/DSC05354.jpg",
+  "photo/horizontal/DSC05360.jpg",
+  "photo/horizontal/DSC05372.jpg",
+  "photo/horizontal/DSC05392.jpg",
+  "photo/horizontal/DSC05398.jpg",
+  "photo/horizontal/DSC06728.jpg",
+  "photo/horizontal/DSC06750.jpg",
+  "photo/horizontal/DSC06752.jpg",
+  "photo/horizontal/DSC06759.jpg",
+  "photo/horizontal/DSC06830.jpg",
+  "photo/horizontal/DSC06843.jpg",
+  "photo/horizontal/DSC06858.jpg",
+  "photo/horizontal/DSC06871.jpg",
+  "photo/horizontal/DSC06872.jpg",
+  "photo/horizontal/DSC06874.jpg",
+  "photo/horizontal/DSC06879.jpg",
+  "photo/horizontal/DSC06881.jpg",
+  "photo/horizontal/DSC06882.jpg",
+  "photo/horizontal/DSC06883.jpg",
+  "photo/horizontal/DSC06933.jpg",
+  "photo/horizontal/DSC06944.jpg",
+  "photo/horizontal/DSC06947.jpg",
+  "photo/horizontal/DSC06948.jpg",
+  "photo/horizontal/DSC06951.jpg",
+  "photo/horizontal/DSC06959.jpg",
+  "photo/horizontal/DSC06965.jpg",
+  "photo/horizontal/DSC06966.jpg",
+  "photo/horizontal/DSC06967.jpg",
+  "photo/horizontal/DSC06995.jpg",
+  "photo/horizontal/DSC06996.jpg",
+  "photo/horizontal/DSC06997.jpg",
+  "photo/horizontal/DSC07000.jpg",
+  "photo/horizontal/DSC07001.jpg",
+  "photo/horizontal/DSC07044.jpg",
+  "photo/horizontal/DSC07046.jpg",
+  "photo/horizontal/DSC07087.jpg",
+  "photo/horizontal/DSC07088.jpg",
+  "photo/horizontal/DSC07095.jpg",
+  "photo/horizontal/DSC07096.jpg",
+  "photo/horizontal/DSC07098.jpg",
+  "photo/horizontal/DSC07124.jpg",
+  "photo/horizontal/DSC07125.jpg",
+  "photo/horizontal/DSC07126.jpg",
+  "photo/horizontal/DSC07127.jpg",
+  "photo/horizontal/DSC07128.jpg",
+  "photo/horizontal/DSC07143.jpg",
+  "photo/horizontal/DSC07144.jpg",
+  "photo/horizontal/DSC07147.jpg",
+  "photo/horizontal/DSC07148.jpg",
+  "photo/horizontal/DSC07149.jpg",
+  "photo/horizontal/DSC07150.jpg",
+  "photo/horizontal/DSC07151.jpg",
+  "photo/horizontal/DSC07173.jpg",
+  "photo/horizontal/DSC07207.jpg",
+  "photo/horizontal/DSC07240.jpg",
+  "photo/horizontal/DSC07242.jpg",
+  "photo/horizontal/DSC07244.jpg",
+  "photo/horizontal/DSC07306.jpg",
+  "photo/horizontal/DSC07307.jpg",
+  "photo/horizontal/DSC07308.jpg",
+  "photo/horizontal/DSC07318.jpg",
+  "photo/horizontal/DSC07319.jpg",
+  "photo/horizontal/DSC07320.jpg",
+  "photo/horizontal/DSC07323.jpg",
+  "photo/horizontal/DSC07324.jpg",
+  "photo/horizontal/DSC07325.jpg",
+  "photo/horizontal/DSC07326.jpg",
+  "photo/horizontal/DSC07331.jpg",
+  "photo/horizontal/DSC07351.jpg",
+  "photo/horizontal/DSC07355.jpg",
+  "photo/horizontal/DSC07361.jpg",
+  "photo/horizontal/DSC07397.jpg",
+  "photo/horizontal/DSC07399.jpg",
+  "photo/horizontal/DSC07401.jpg",
+  "photo/horizontal/DSC07471.jpg",
+  "photo/horizontal/DSC07503.jpg",
+  "photo/horizontal/DSC08389.jpg",
+  "photo/horizontal/DSC08390.jpg",
+  "photo/horizontal/DSC08390_1.jpg",
+  "photo/horizontal/DSC08404.jpg",
+  "photo/horizontal/DSC08412.jpg",
+  "photo/horizontal/DSC08419.jpg",
+  "photo/horizontal/IMG_7537.jpg",
+  "photo/horizontal/PXL_20221019_133705633.jpg"
+];
+
+
+    let currentIndex = 0;
+
+    function initializeGallery() {
       const photoDisplay = document.getElementById("photo-display");
 
       const img1 = document.createElement("img");
@@ -142,30 +215,28 @@
       img1.src = photos[0];
       img1.classList.add("show");
 
-function displayNextPhoto() {
-  let nextIndex;
+      function displayNextPhoto() {
+        let nextIndex;
+        if (photos.length <= 1) {
+          nextIndex = 0;
+        } else {
+          do {
+            nextIndex = Math.floor(Math.random() * photos.length);
+          } while (nextIndex === currentIndex);
+        }
 
-  if (photos.length <= 1) {
-    nextIndex = 0; // 只有一張圖就一直顯示它
-  } else {
-    do {
-      nextIndex = Math.floor(Math.random() * photos.length);
-    } while (nextIndex === currentIndex);
-  }
+        const currentImg = img1.classList.contains("show") ? img1 : img2;
+        const nextImg = currentImg === img1 ? img2 : img1;
 
-  const currentImg = img1.classList.contains("show") ? img1 : img2;
-  const nextImg = currentImg === img1 ? img2 : img1;
+        nextImg.src = photos[nextIndex];
+        nextImg.classList.remove("hide");
+        nextImg.classList.add("show");
 
-  nextImg.src = photos[nextIndex];
-  nextImg.classList.remove("hide");
-  nextImg.classList.add("show");
+        currentImg.classList.remove("show");
+        currentImg.classList.add("hide");
 
-  currentImg.classList.remove("show");
-  currentImg.classList.add("hide");
-
-  currentIndex = nextIndex;
-}
-
+        currentIndex = nextIndex;
+      }
 
       setInterval(displayNextPhoto, 5000);
     }
