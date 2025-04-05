@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Po-Cheng Huang | Resume</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            background: linear-gradient(90deg, #374785, #24305e);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: contain;
+            background-color: white;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-text {
+            flex: 1 1 300px;
+            margin-left: 30px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #f5f5f5;
+        }
+
+        header p {
+            margin-top: 10px;
+            color: #d0d0e0;
+        }
+
+        h2 {
+            color: #374785;
+            border-bottom: 2px solid #374785;
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li::before {
+            content: "\2022";
+            color: #374785;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        a {
+            color: #374785;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .gallery-button {
+            display: block;
+            margin: 40px auto 0;
+            width: fit-content;
+            padding: 12px 24px;
+            font-size: 16px;
+            color: white;
+            background-color: #374785;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .gallery-button:hover {
+            background-color: #24305e;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            background-color: #374785;
+            margin-top: 60px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
+            <div class="header-text">
+                <h1>Po-Cheng Huang</h1>
+                <p>Graduate Student | Embedded Systems | Software Development</p>
+            </div>
+        </header>
+
+        <div class="section">
+            <h2>About Me</h2>
+            <p>
+                I'm Po-Cheng Huang, a master's student in Computer Engineering at National Formosa University, with research focus in embedded systems and network protocols under CNS Lab. Passionate about systems programming and real-time applications.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <ul>
+                <li>M.S., Computer Engineering, National Formosa University (2024/9 ~ 2026/6)</li>
+                <li>B.S., Computer Engineering, National Formosa University (2020/9 ~ 2024/6)</li>
+                <li>Science Track, National Beigang Senior High School (2017/9 ~ 2020/6)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <ul>
+                <li>Languages: C/C++, Python, TypeScript, Shell Script</li>
+                <li>Tools: Git, Linux, Makefile, VSCode</li>
+                <li>Languages: Chinese (Native), Japanese (JLPT N2), English (Intermediate)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Projects</h2>
+            <ul>
+                <li><strong>microC/OS-II Scheduling Modification</strong>: Implemented Rate Monotonic and FIFO scheduling in RTOS kernel (2025/2 ~ 2025/6)</li>
+                <li><strong>EDA Tools Development</strong>: Built C++ tools for clock tree synthesis, cell legalization, and ILP-based scheduling (2024/9 ~ 2025/1)</li>
+                <li><strong>Compiler Project</strong>: Developed a compiler for Turing Language using Lex/Yacc and output Java Assembler (2023/2 ~ 2023/6)</li>
+                <li><strong>Game AI Development</strong>: Created strategy AI with Cocos Creator and TypeScript/C++ for LUDO and RUMMY games (2021/3 ~ 2022/6)</li>
+                <li><strong>Network Automation</strong>: Automated TCP network test framework with Shell, Python, and C++ (2024/7 ~ 2025/6)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Contact</h2>
+            <p>Email: <a href="mailto:shiauhe0107@gmail.com">shiauhe0107@gmail.com</a></p>
+            <p>Phone: +886 907-489-720</p>
+            <p>GitHub: <a href="https://github.com/shiauhe" target="_blank">github.com/shiauhe</a></p>
+        </div>
+
+        <a href="photo-gallery.html" class="gallery-button">Go to Gallery</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Po-Cheng Huang. All rights reserved.</p>
+    </footer>
+</body>
+</html>
