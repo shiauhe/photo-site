@@ -51,17 +51,16 @@
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       position: absolute;
-      opacity: 0;
-      transition: opacity 2s ease-in-out;
+      display: none;
     }
 
     .photo-display img.show {
-      opacity: 1;
+      display: block;
       z-index: 2;
     }
 
     .photo-display img.hide {
-      opacity: 0;
+      display: none;
       z-index: 1;
     }
 
@@ -83,6 +82,27 @@
       background-color: #24305e;
     }
 
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 20px;
+    }
+
+    .control-button {
+      background-color: #24305e;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .control-button:hover {
+      background-color: #141c3a;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -102,6 +122,11 @@
 
     <div class="photo-display" id="photo-display"></div>
 
+    <div class="controls">
+      <button class="control-button" id="prev">Prev</button>
+      <button class="control-button" id="next">Next</button>
+    </div>
+
     <a href="index.html" class="back-button">Back to Home</a>
   </div>
 
@@ -110,135 +135,134 @@
   </footer>
 
   <script>
-const photos = [
-  "photo/horizontal/DSC05339.jpg",
-  "photo/horizontal/DSC05341.jpg",
-  "photo/horizontal/DSC05344.jpg",
-  "photo/horizontal/DSC05346_1.jpg",
-  "photo/horizontal/DSC05354.jpg",
-  "photo/horizontal/DSC05360.jpg",
-  "photo/horizontal/DSC05372.jpg",
-  "photo/horizontal/DSC05392.jpg",
-  "photo/horizontal/DSC05398.jpg",
-  "photo/horizontal/DSC06728.jpg",
-  "photo/horizontal/DSC06750.jpg",
-  "photo/horizontal/DSC06752.jpg",
-  "photo/horizontal/DSC06759.jpg",
-  "photo/horizontal/DSC06830.jpg",
-  "photo/horizontal/DSC06843.jpg",
-  "photo/horizontal/DSC06858.jpg",
-  "photo/horizontal/DSC06871.jpg",
-  "photo/horizontal/DSC06872.jpg",
-  "photo/horizontal/DSC06874.jpg",
-  "photo/horizontal/DSC06879.jpg",
-  "photo/horizontal/DSC06881.jpg",
-  "photo/horizontal/DSC06882.jpg",
-  "photo/horizontal/DSC06883.jpg",
-  "photo/horizontal/DSC06933.jpg",
-  "photo/horizontal/DSC06944.jpg",
-  "photo/horizontal/DSC06947.jpg",
-  "photo/horizontal/DSC06948.jpg",
-  "photo/horizontal/DSC06951.jpg",
-  "photo/horizontal/DSC06959.jpg",
-  "photo/horizontal/DSC06965.jpg",
-  "photo/horizontal/DSC06966.jpg",
-  "photo/horizontal/DSC06967.jpg",
-  "photo/horizontal/DSC06995.jpg",
-  "photo/horizontal/DSC06996.jpg",
-  "photo/horizontal/DSC06997.jpg",
-  "photo/horizontal/DSC07000.jpg",
-  "photo/horizontal/DSC07001.jpg",
-  "photo/horizontal/DSC07044.jpg",
-  "photo/horizontal/DSC07046.jpg",
-  "photo/horizontal/DSC07087.jpg",
-  "photo/horizontal/DSC07088.jpg",
-  "photo/horizontal/DSC07095.jpg",
-  "photo/horizontal/DSC07096.jpg",
-  "photo/horizontal/DSC07098.jpg",
-  "photo/horizontal/DSC07124.jpg",
-  "photo/horizontal/DSC07125.jpg",
-  "photo/horizontal/DSC07126.jpg",
-  "photo/horizontal/DSC07127.jpg",
-  "photo/horizontal/DSC07128.jpg",
-  "photo/horizontal/DSC07143.jpg",
-  "photo/horizontal/DSC07144.jpg",
-  "photo/horizontal/DSC07147.jpg",
-  "photo/horizontal/DSC07148.jpg",
-  "photo/horizontal/DSC07149.jpg",
-  "photo/horizontal/DSC07150.jpg",
-  "photo/horizontal/DSC07151.jpg",
-  "photo/horizontal/DSC07173.jpg",
-  "photo/horizontal/DSC07207.jpg",
-  "photo/horizontal/DSC07240.jpg",
-  "photo/horizontal/DSC07242.jpg",
-  "photo/horizontal/DSC07244.jpg",
-  "photo/horizontal/DSC07306.jpg",
-  "photo/horizontal/DSC07307.jpg",
-  "photo/horizontal/DSC07308.jpg",
-  "photo/horizontal/DSC07318.jpg",
-  "photo/horizontal/DSC07319.jpg",
-  "photo/horizontal/DSC07320.jpg",
-  "photo/horizontal/DSC07323.jpg",
-  "photo/horizontal/DSC07324.jpg",
-  "photo/horizontal/DSC07325.jpg",
-  "photo/horizontal/DSC07326.jpg",
-  "photo/horizontal/DSC07331.jpg",
-  "photo/horizontal/DSC07351.jpg",
-  "photo/horizontal/DSC07355.jpg",
-  "photo/horizontal/DSC07361.jpg",
-  "photo/horizontal/DSC07397.jpg",
-  "photo/horizontal/DSC07399.jpg",
-  "photo/horizontal/DSC07401.jpg",
-  "photo/horizontal/DSC07471.jpg",
-  "photo/horizontal/DSC07503.jpg",
-  "photo/horizontal/DSC08389.jpg",
-  "photo/horizontal/DSC08390.jpg",
-  "photo/horizontal/DSC08390_1.jpg",
-  "photo/horizontal/DSC08404.jpg",
-  "photo/horizontal/DSC08412.jpg",
-  "photo/horizontal/DSC08419.jpg",
-  "photo/horizontal/IMG_7537.jpg",
-  "photo/horizontal/PXL_20221019_133705633.jpg"
-];
-
+    const photos = [
+      "photo/horizontal/DSC05354.jpg",
+      "photo/horizontal/DSC05372.jpg",
+      "photo/horizontal/DSC05392.jpg",
+      "photo/horizontal/DSC05398.jpg",
+      "photo/horizontal/IMG_7537.jpg",
+      "photo/horizontal/DSC06728.jpg",
+      "photo/horizontal/DSC06750.jpg",
+      "photo/horizontal/DSC06752.jpg",
+      "photo/horizontal/DSC06759.jpg",
+      "photo/horizontal/DSC06830.jpg",
+      "photo/horizontal/DSC06843.jpg",
+      "photo/horizontal/DSC06858.jpg",
+      "photo/horizontal/DSC06871.jpg",
+      "photo/horizontal/DSC06872.jpg",
+      "photo/horizontal/DSC06874.jpg",
+      "photo/horizontal/DSC06879.jpg",
+      "photo/horizontal/DSC06881.jpg",
+      "photo/horizontal/DSC06882.jpg",
+      "photo/horizontal/DSC06883.jpg",
+      "photo/horizontal/DSC06933.jpg",
+      "photo/horizontal/DSC06944.jpg",
+      "photo/horizontal/DSC06947.jpg",
+      "photo/horizontal/DSC06948.jpg",
+      "photo/horizontal/DSC06951.jpg",
+      "photo/horizontal/DSC06959.jpg",
+      "photo/horizontal/DSC06965.jpg",
+      "photo/horizontal/DSC06966.jpg",
+      "photo/horizontal/DSC06967.jpg",
+      "photo/horizontal/DSC06995.jpg",
+      "photo/horizontal/DSC06996.jpg",
+      "photo/horizontal/DSC06997.jpg",
+      "photo/horizontal/DSC07000.jpg",
+      "photo/horizontal/DSC07001.jpg",
+      "photo/horizontal/DSC07044.jpg",
+      "photo/horizontal/DSC07046.jpg",
+      "photo/horizontal/DSC07087.jpg",
+      "photo/horizontal/DSC07088.jpg",
+      "photo/horizontal/DSC07095.jpg",
+      "photo/horizontal/DSC07096.jpg",
+      "photo/horizontal/DSC07098.jpg",
+      "photo/horizontal/DSC07124.jpg",
+      "photo/horizontal/DSC07125.jpg",
+      "photo/horizontal/DSC07126.jpg",
+      "photo/horizontal/DSC07127.jpg",
+      "photo/horizontal/DSC07128.jpg",
+      "photo/horizontal/DSC07143.jpg",
+      "photo/horizontal/DSC07144.jpg",
+      "photo/horizontal/DSC07147.jpg",
+      "photo/horizontal/DSC07148.jpg",
+      "photo/horizontal/DSC07149.jpg",
+      "photo/horizontal/DSC07150.jpg",
+      "photo/horizontal/DSC07151.jpg",
+      "photo/horizontal/DSC07173.jpg",
+      "photo/horizontal/DSC07207.jpg",
+      "photo/horizontal/DSC07240.jpg",
+      "photo/horizontal/DSC07242.jpg",
+      "photo/horizontal/DSC07244.jpg",
+      "photo/horizontal/DSC07306.jpg",
+      "photo/horizontal/DSC07307.jpg",
+      "photo/horizontal/DSC07308.jpg",
+      "photo/horizontal/DSC07318.jpg",
+      "photo/horizontal/DSC07319.jpg",
+      "photo/horizontal/DSC07320.jpg",
+      "photo/horizontal/DSC07323.jpg",
+      "photo/horizontal/DSC07324.jpg",
+      "photo/horizontal/DSC07325.jpg",
+      "photo/horizontal/DSC07326.jpg",
+      "photo/horizontal/DSC07331.jpg",
+      "photo/horizontal/DSC07351.jpg",
+      "photo/horizontal/DSC07355.jpg",
+      "photo/horizontal/DSC07361.jpg",
+      "photo/horizontal/DSC07397.jpg",
+      "photo/horizontal/DSC07399.jpg",
+      "photo/horizontal/DSC07401.jpg",
+      "photo/horizontal/DSC07471.jpg",
+      "photo/horizontal/DSC07503.jpg",
+      "photo/horizontal/DSC08389.jpg",
+      "photo/horizontal/DSC08390.jpg",
+      "photo/horizontal/DSC08390_1.jpg",
+      "photo/horizontal/DSC08404.jpg",
+      "photo/horizontal/DSC08412.jpg",
+      "photo/horizontal/DSC08419.jpg",
+      "photo/horizontal/PXL_20221019_133705633.jpg"
+    ];
 
     let currentIndex = 0;
+    let img1, img2;
 
     function initializeGallery() {
       const photoDisplay = document.getElementById("photo-display");
-
-      const img1 = document.createElement("img");
-      const img2 = document.createElement("img");
+      img1 = document.createElement("img");
+      img2 = document.createElement("img");
       photoDisplay.appendChild(img1);
       photoDisplay.appendChild(img2);
 
       img1.src = photos[0];
       img1.classList.add("show");
 
-      function displayNextPhoto() {
-        let nextIndex;
-        if (photos.length <= 1) {
-          nextIndex = 0;
-        } else {
-          do {
-            nextIndex = Math.floor(Math.random() * photos.length);
-          } while (nextIndex === currentIndex);
-        }
+      preloadNext();
+      setInterval(() => showPhoto(currentIndex + 1), 5000);
 
-        const currentImg = img1.classList.contains("show") ? img1 : img2;
-        const nextImg = currentImg === img1 ? img2 : img1;
+      document.getElementById("prev").onclick = () => showPhoto(currentIndex - 1);
+      document.getElementById("next").onclick = () => showPhoto(currentIndex + 1);
+    }
 
-        nextImg.src = photos[nextIndex];
-        nextImg.classList.remove("hide");
-        nextImg.classList.add("show");
+    function showPhoto(index) {
+      const total = photos.length;
+      const nextIndex = (index + total) % total;
 
-        currentImg.classList.remove("show");
-        currentImg.classList.add("hide");
+      const currentImg = img1.classList.contains("show") ? img1 : img2;
+      const nextImg = currentImg === img1 ? img2 : img1;
 
-        currentIndex = nextIndex;
-      }
+      nextImg.src = photos[nextIndex];
+      nextImg.classList.remove("hide");
+      nextImg.classList.add("show");
 
-      setInterval(displayNextPhoto, 5000);
+      currentImg.classList.remove("show");
+      currentImg.classList.add("hide");
+
+      currentIndex = nextIndex;
+      preloadNext();
+    }
+
+    function preloadNext() {
+      const preload = new Image();
+      const nextIndex = (currentIndex + 1) % photos.length;
+      preload.src = photos[nextIndex];
     }
 
     initializeGallery();
